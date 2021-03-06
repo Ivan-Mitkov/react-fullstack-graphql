@@ -1,5 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const Orders = () => <div>orders</div>;
+const Orders = () => <div>Orders</div>;
 
 export default Orders;
