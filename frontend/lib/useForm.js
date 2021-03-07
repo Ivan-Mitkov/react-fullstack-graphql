@@ -25,7 +25,6 @@ export default function useForm(initialState = {}) {
       //returns array [[key,''],[key,'']]
       Object.entries(inputs).map(([key, value]) => [key, ""])
     );
-
     setInputs(blankState);
   };
 

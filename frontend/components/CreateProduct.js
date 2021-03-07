@@ -1,22 +1,64 @@
 import React from "react";
+import gql from "graphql-tag";
+import { useMutation } from "@apollo/client";
 import useForm from "../lib/useForm";
 import Form from "./styles/Form";
+import ErrorMessage from "./ErrorMessage";
+
+const CREATE_PRODUCT_MUTATION = gql`
+  mutation CREATE_PRODUCT_MUTATION(
+    $name: String!
+    $price: Int!
+    $description: String!
+    $image: Upload
+  ) {
+    createProduct(
+      data: {
+        name: $name
+        price: $price
+        description: $description
+        status: "AVAILABLE"
+        photo: { create: { image: $image, altText: $name } }
+      }
+    ) {
+      id
+      name
+      description
+      price
+      status
+    }
+  }
+`;
 const CreateProduct = () => {
+  const inputRef = React.useRef("");
   const { inputs, handleChange, resetForm, clearForm } = useForm({
-    name: "Name",
+    name: "",
     price: "",
     description: "",
     image: "",
   });
+  const [createProduct, { loading, error, data }] = useMutation(
+    CREATE_PRODUCT_MUTATION,
+    {
+      variables: inputs,
+    }
+  );
 
-  const handleSubmit = (e) => {
+  const clearFileNameFromInput = () => {
+    inputRef.current.value = "";
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await createProduct();
+    clearForm();
+    clearFileNameFromInput();
   };
   const { name, price, description, image } = inputs;
-
+  
   return (
     <Form onSubmit={handleSubmit}>
-      <fieldset>
+      <ErrorMessage error={error} />
+      <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
           Add Image
           <input
@@ -25,6 +67,7 @@ const CreateProduct = () => {
             id="image"
             name="image"
             onChange={handleChange}
+            ref={inputRef}
           />
         </label>
         <label htmlFor="name">
