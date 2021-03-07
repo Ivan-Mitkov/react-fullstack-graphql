@@ -1,8 +1,8 @@
-import React from "react";
+import SingleProduct from "../../components/SingleProduct";
 
-const SingleProduct = (pageProps) => {
-  console.log('single',pageProps);
-  return <div>Name {JSON.stringify(pageProps)}</div>;
+
+const SingleProductPage = ({ query }) => {
+  return <SingleProduct id={query.id} />;
 };
 
-export default SingleProduct;
+export default SingleProductPage;
