@@ -10,7 +10,7 @@ export default function useForm(initialState = {}) {
       value = +parseFloat(value).toFixed(2);
     }
     if (type === "file") {
-      value[0] = e.target.files;
+      [value] = e.target.files;
     }
     setInputs({ ...inputs, [name]: value });
   };
