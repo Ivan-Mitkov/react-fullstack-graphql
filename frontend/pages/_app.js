@@ -26,6 +26,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
 //https://www.apollographql.com/docs/react/api/react/hooks/#the-apolloprovider-component
 //apollo prop comes from withData function wich wrap the app
 function MyApp({ Component, pageProps, apollo }) {
+  // console.log(pageProps)
   return (
     <ApolloProvider client={apollo}>
       <Page>

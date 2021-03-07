@@ -19,6 +19,18 @@ const ProductItem = ({ product }) => {
       <PriceTag>{price}</PriceTag>
       <p>{product.description}</p>
       {/* TODO: add buttons to edit and delete */}
+      <div className="button-list">
+        <Link
+          href={{
+            pathname: "update",
+            query: {
+              id: product.id,
+            },
+          }}
+        >
+          Edit
+        </Link>
+      </div>
     </ItemStyles>
   );
 };

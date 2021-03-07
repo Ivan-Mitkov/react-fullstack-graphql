@@ -2,6 +2,13 @@ import React from "react";
 
 export default function useForm(initialState = {}) {
   const [inputs, setInputs] = React.useState(initialState);
+  //We need to start useEffect when initial values changes, but this starts infinite loop se let's use string not object
+  const initialValues = Object.values(initialState).join("");
+
+  React.useEffect(() => {
+    console.log("Firing useEffect");
+    setInputs(initialState);
+  }, [initialValues]);
 
   const handleChange = (e) => {
     let { value, name, type } = e.target;
