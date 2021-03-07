@@ -1,4 +1,5 @@
 import React from "react";
+import Head from 'next/head'
 import PropTypes from "prop-types";
 import Header from "./Header";
 import { createGlobalStyle } from "styled-components";
@@ -51,11 +52,16 @@ const InnerStyles = styled.div`
 `;
 
 const Page = ({ children }) => (
-  <div>
-    <GlobalStyles />
-    <Header />
-    <InnerStyles>{children}</InnerStyles>
-  </div>
+  <>
+    <Head>
+      <link rel="shortcut icon" href="/static/favicon.ico" />
+    </Head>
+    <div>
+      <GlobalStyles />
+      <Header />
+      <InnerStyles>{children}</InnerStyles>
+    </div>
+  </>
 );
 
 export default Page;

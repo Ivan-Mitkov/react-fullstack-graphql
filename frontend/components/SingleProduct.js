@@ -1,6 +1,8 @@
 import React from "react";
+import Head from "next/head";
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
+import styled from "styled-components";
 import ErrorMessage from "./ErrorMessage";
 import { formatMoney } from "../lib/formatMoney";
 const SINGLE_ITEM_QUERY = gql`
@@ -20,6 +22,22 @@ const SINGLE_ITEM_QUERY = gql`
   }
 `;
 
+const ProductStyles = styled.div`
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  max-width: var(--maxWidth);
+  justify-content: center;
+  align-items: top;
+  gap: 40px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .details {
+  }
+`;
 const SingleProduct = ({ id }) => {
   const { data, loading, error } = useQuery(SINGLE_ITEM_QUERY, {
     variables: {
@@ -41,14 +59,19 @@ const SingleProduct = ({ id }) => {
     },
   } = data;
   return (
-    <div>
-      <img src={publicUrlTransformed} alt={altText}></img>
-      <div className="details">
-        <h2>{name}</h2>
-        <p>{description}</p>
-        <p>{formatMoney(price)}</p>
-      </div>
-    </div>
+    <>
+      <Head>
+        <title>Sick Fits | {name}</title>
+      </Head>
+      <ProductStyles>
+        <img src={publicUrlTransformed} alt={altText}></img>
+        <div className="details">
+          <h2>{name}</h2>
+          <p>{description}</p>
+          <p>{formatMoney(price)}</p>
+        </div>
+      </ProductStyles>
+    </>
   );
 };
 
