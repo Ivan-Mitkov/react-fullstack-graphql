@@ -4,6 +4,7 @@ import ItemStyles from "./styles/ItemStyles";
 import Title from "./styles/Title";
 import PriceTag from "./styles/PriceTag";
 import { formatMoney } from "../lib/formatMoney";
+import DeleteProduct from "./DeleteProduct";
 
 const ProductItem = ({ product }) => {
   const price = formatMoney(product.price);
@@ -19,10 +20,10 @@ const ProductItem = ({ product }) => {
       <PriceTag>{price}</PriceTag>
       <p>{product.description}</p>
       {/* TODO: add buttons to edit and delete */}
-      <div className="button-list">
+      <div className="buttonList">
         <Link
           href={{
-            pathname: "update",
+            pathname: "/update",
             query: {
               id: product.id,
             },
@@ -30,6 +31,7 @@ const ProductItem = ({ product }) => {
         >
           Edit
         </Link>
+        <DeleteProduct id={product.id}>Delete</DeleteProduct>
       </div>
     </ItemStyles>
   );

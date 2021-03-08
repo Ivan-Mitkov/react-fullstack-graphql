@@ -45,9 +45,9 @@ const UpdateProduct = ({ query }) => {
 
   //create state for the form inputs
   const { inputs, handleChange, resetForm, clearForm } = useForm({
-    name: data?.Product?.name,
-    price: data?.Product?.price,
-    description: data?.Product?.description,
+    name: data?.Product?.name || "",
+    price: data?.Product?.price || "",
+    description: data?.Product?.description || "",
   });
   const { name, price, description, image } = inputs;
 
