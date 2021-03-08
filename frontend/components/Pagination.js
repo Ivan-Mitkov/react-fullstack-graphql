@@ -16,9 +16,9 @@ const ALL_PRODUCTS_COUNT = gql`
 `;
 const Pagination = ({ page }) => {
   const { loading, error, data } = useQuery(ALL_PRODUCTS_COUNT);
-  // console.log(data);
   if (loading) return "";
   if (error) return <ErrorMessage error={error}></ErrorMessage>;
+  //calculate pages
   const { count } = data._allProductsMeta;
   const pageCount = Math.ceil(count / perPage);
   return (
@@ -26,13 +26,13 @@ const Pagination = ({ page }) => {
       <Head>
         <title>Sick - Fits | Page - {page}</title>
       </Head>
-      <Link href={`/page/${page - 1}`}>
+      <Link href={`/products/${parseInt(page) - 1}`}>
         <a aria-disabled={page <= 1}>Prev</a>
       </Link>
       <p>
         Page {page} of {pageCount}
       </p>
-      <Link href={`/page/${page + 1}`}>
+      <Link href={`/products/${parseInt(page) + 1}`}>
         <a aria-disabled={page >= pageCount}>Next</a>
       </Link>
       <p>{count} Items Total</p>
