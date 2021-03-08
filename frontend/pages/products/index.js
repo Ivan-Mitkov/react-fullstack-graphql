@@ -8,7 +8,7 @@ const ProductsPage = () => {
   return (
     <div>
       <Pagination page={query.page || 1}></Pagination>
-      <Products />
+      <Products page={query.page || 1} />
       <Pagination page={query.page || 1}></Pagination>
     </div>
   );
