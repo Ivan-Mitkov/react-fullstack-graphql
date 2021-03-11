@@ -13,5 +13,18 @@ export const User = list({
     //https://next.keystonejs.com/apis/fields#password
     password: password(),
     //TODO: add cart, roles and orders
+    cart: relationship({
+      ref: "CartItem.user",
+      many: true,
+      //ui: Controls how the field is displayed in the Admin UI.
+      ui: {
+        createView: {
+          fieldMode: "hidden",
+        },
+        itemView: {
+          fieldMode: "read",
+        },
+      },
+    }),
   },
 });
