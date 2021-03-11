@@ -43,9 +43,7 @@ const Reset = ({ token }) => {
     e.preventDefault();
     //send the email and password to graphqlapi
     try {
-      console.log("SUBMIT!");
       const res = await resetPassword();
-      console.log(res);
     } catch (error) {
       console.log(error.message);
     }

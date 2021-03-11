@@ -13,7 +13,7 @@ const ResetPage = ({ query }) => {
   }
   return (
     <div>
-      <p>RESET YOUR PASSWORD {query.token}</p>
+      <p>RESET YOUR PASSWORD</p>
       <Reset token={query.token}/>
     </div>
   );

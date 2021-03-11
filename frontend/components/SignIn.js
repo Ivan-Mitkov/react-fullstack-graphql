@@ -36,10 +36,10 @@ const SignIn = () => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputs);
+    // console.log(inputs);
     //send the email and password to graphqlapi
     const res = await signin();
-    console.log(res);
+    // console.log(res);
     resetForm();
   };
 

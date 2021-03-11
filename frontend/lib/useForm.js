@@ -6,7 +6,7 @@ export default function useForm(initialState = {}) {
   const initialValues = Object.values(initialState).join("");
 
   React.useEffect(() => {
-    console.log("Firing useEffect");
+    // console.log("Firing useEffect");
     setInputs(initialState);
   }, [initialValues]);
 
