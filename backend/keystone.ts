@@ -25,6 +25,11 @@ const { withAuth } = createAuth({
     fields: ["name", "email", "password"],
     //TODO: Add in initial roles
   },
+  passwordResetLink: {
+    sendToken: async (args) => {
+      console.log(args);
+    },
+  },
 });
 //https://next.keystonejs.com/apis/config
 export default withAuth(
