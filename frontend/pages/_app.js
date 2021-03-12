@@ -6,7 +6,7 @@ import NProgress from "nprogress";
 import "../components/styles/nprogress.css";
 import { ApolloProvider } from "@apollo/client";
 import withData from "../lib/withData";
-
+import { CartStateProvider } from "../lib/cartState";
 //https://ricostacruz.com/nprogress/
 //https://nextjs.org/docs/api-reference/next/router#routerevents
 Router.events.on("routeChangeStart", () => NProgress.start());
@@ -29,9 +29,11 @@ function MyApp({ Component, pageProps, apollo }) {
   // console.log(pageProps)
   return (
     <ApolloProvider client={apollo}>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
+      <CartStateProvider>
+        <Page>
+          <Component {...pageProps} />
+        </Page>
+      </CartStateProvider>
     </ApolloProvider>
   );
 }

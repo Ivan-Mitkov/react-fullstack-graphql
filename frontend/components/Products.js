@@ -40,7 +40,7 @@ const Products = ({ page }) => {
   return (
     <div>
       <ProductList>
-        {data.allProducts.map((p) => (
+        {data?.allProducts.map((p) => (
           <ProductItem key={p.id} product={p} />
         ))}
       </ProductList>
