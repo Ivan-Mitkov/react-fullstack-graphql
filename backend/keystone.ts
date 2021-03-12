@@ -11,6 +11,7 @@ import { CartItem } from "./schemas/CartItem";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
 import {sendPasswordResetEmail} from './lib/mail'
+import { extendGraphqlShema } from "./mutations";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits";
@@ -60,6 +61,8 @@ export default withAuth(
       ProductImage,
       CartItem
     }),
+    //custom resolvers
+    extendGraphqlSchema:extendGraphqlShema,
     ui: {
       //Show the ui only for peopla that pass this test
       // isAccessAllowed: () => true,
