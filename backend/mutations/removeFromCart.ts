@@ -24,16 +24,18 @@ async function removeFromCart(
   // console.log("Product ID", productId);
   const [existingCartItem] = allCartItems;
   //3. see if item to add is already in the cart
-  console.log("CART ITEM: ", existingCartItem);
+  // console.log("CART ITEM --remove: ", existingCartItem);
   if (existingCartItem.quantity > 1) {
     // console.log("this item is the cart");
     // console.log(existingCartItem.id);
     //4. if it is deccrement quantity by 1
     // console.dir(context.lists.CartItem);
-    return await context.lists.CartItem.updateOne({
+    const res = await context.lists.CartItem.updateOne({
       id: existingCartItem.id,
       data: { quantity: existingCartItem.quantity - 1 },
     });
+    // console.log("RETURNS", res);
+    return res;
   } else {
     //if it's only one delete product from cart
     if (existingCartItem.quantity === 1) {

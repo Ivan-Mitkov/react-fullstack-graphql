@@ -24,11 +24,11 @@ const BigButton = styled.button`
 //No arrow function
 function update(cache, payload) {
   // console.log("Apollo Cache: ", cache);
-  // console.log("Payload: ", payload.data);
+  // console.log("Payload: ", payload.data.removeFromCart);
   cache.evict(cache.identify(payload.data.removeFromCart));
 }
 const RemoveFromCart = ({ id }) => {
-  const [removeFromCart, { error, loading }] = useMutation(REMOVE_FROMCART, {
+  const [removeFromCart, {  loading }] = useMutation(REMOVE_FROMCART, {
     variables: {
       productId: id,
     },
@@ -38,9 +38,11 @@ const RemoveFromCart = ({ id }) => {
     //USE OPTIMISTIC UPDATE
     //NOT WORKING
     // optimisticResponse: {
+    //   __typename: "Mutation",
     //   removeFromCart: {
     //     __typename: "CartItem",
     //     id,
+       
     //   },
     // },
   });
