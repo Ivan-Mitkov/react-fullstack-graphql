@@ -4,11 +4,19 @@ import NavStyles from "./styles/NavStyles";
 import { useUser } from "./User";
 import SignOut from "./SignOut";
 import { useCart } from "../lib/cartState";
+import CartCount from "./CartCount";
 
 const Nav = () => {
   const user = useUser();
   const { openCart } = useCart();
-  // console.log(user);
+
+  const countItems = () => {
+    const items = user.cart
+      .map((q) => q.quantity)
+      .reduce((acc, q) => acc + q, 0);
+      return items
+  };
+
   return (
     <NavStyles>
       <Link href="/products">Products</Link>
@@ -20,6 +28,7 @@ const Nav = () => {
           <SignOut />
           <button type="button" onClick={openCart}>
             My Cart
+            <CartCount count={countItems()}></CartCount>
           </button>
         </>
       )}

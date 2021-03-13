@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { calcTotalPrice } from "../lib/calcTotalPrice";
 import { formatMoney } from "../lib/formatMoney";
+import RemoveFromCart from "./RemoveFromCart";
 
 const CartItemStyles = styled.li`
   padding: 1rem 0;
@@ -25,13 +25,16 @@ const CartItem = ({ cartItem }) => {
         alt={product.name}
         width="100"
       ></img>
-      <h3>{product.name}</h3>
-      <p>
-        {formatMoney(product.price * cartItem.quantity)}
-        <em>
-          - {cartItem.quantity} &times; {formatMoney(product.price)}
-        </em>
-      </p>
+      <div>
+        <h3>{product.name}</h3>
+        <p>
+          {formatMoney(product.price * cartItem.quantity)}
+          <em>
+            - {cartItem.quantity} &times; {formatMoney(product.price)}
+          </em>
+        </p>
+      </div>
+      <RemoveFromCart id={product.id} />
     </CartItemStyles>
   );
 };
