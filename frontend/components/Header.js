@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import Nav from "./Nav";
-import Cart from './Cart';
+import Cart from "./Cart";
 import styled from "styled-components";
-
+import Search from "./Search";
 const Logo = styled.h1`
   font-size: 4rem;
   margin-left: 2rem;
@@ -44,9 +44,9 @@ const Header = () => (
       <Nav />
     </div>
     <div className="sub-bar">
-      <p>Search</p>
+      <Search />
     </div>
-    <Cart/>
+    <Cart />
   </HeaderStyles>
 );
 
