@@ -38,15 +38,14 @@ const Search = () => {
   );
   //items to show in dropdown
   const items = data?.searchResults || [];
-  console.log(data);
-  console.log(items);
+  // console.log(data);
+  // console.log(items);
   //DEBONCE search
   const debounceFind = debounce(searchResults, 500);
   //Allows reseting the internal id counter which is used to generate unique ids for Downshift component.
   resetIdCounter();
   //https://github.com/downshift-js/downshift
   //https://github.com/downshift-js/downshift/tree/master/src/hooks/useCombobox
-  const reRouteEndRest = (id) => {};
   const {
     isOpen,
     inputValue,
@@ -55,7 +54,7 @@ const Search = () => {
     getMenuProps,
     getItemProps,
     highlightedIndex,
-    reset,
+    
   } = useCombobox({
     items: items,
     onInputValueChange() {

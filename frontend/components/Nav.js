@@ -14,7 +14,7 @@ const Nav = () => {
     const items = user.cart
       .map((q) => q.quantity)
       .reduce((acc, q) => acc + q, 0);
-      return items
+    return items;
   };
 
   return (

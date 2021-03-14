@@ -7,7 +7,7 @@ import CloseButton from "./styles/CloseButton";
 import Supreme from "./styles/Supreme";
 import { useUser } from "./User";
 import { useCart } from "../lib/cartState";
-
+import Checkout from "./Checkout";
 const Cart = () => {
   const me = useUser();
   const { cartOpen, closeCart, openCart, toggleCart } = useCart();
@@ -27,6 +27,7 @@ const Cart = () => {
       </ul>
       <footer>
         <p>Total: {formatMoney(calcTotalPrice(me.cart))}</p>
+        <Checkout />
       </footer>
     </CartStyles>
   );
