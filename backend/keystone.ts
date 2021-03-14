@@ -7,10 +7,12 @@ import {
 } from "@keystone-next/keystone/session";
 import { User } from "./schemas/User";
 import { Product } from "./schemas/Product";
+import { OrderItem } from "./schemas/OrderItem";
+import { Order } from "./schemas/Order";
 import { CartItem } from "./schemas/CartItem";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
-import {sendPasswordResetEmail} from './lib/mail'
+import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphqlShema } from "./mutations";
 
 const databaseURL =
@@ -30,7 +32,7 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     sendToken: async (args) => {
-      await sendPasswordResetEmail(args.token,args.identity)
+      await sendPasswordResetEmail(args.token, args.identity);
     },
   },
 });
@@ -59,10 +61,12 @@ export default withAuth(
       User,
       Product,
       ProductImage,
-      CartItem
+      OrderItem,
+      CartItem,
+      Order,
     }),
     //custom resolvers
-    extendGraphqlSchema:extendGraphqlShema,
+    extendGraphqlSchema: extendGraphqlShema,
     ui: {
       //Show the ui only for peopla that pass this test
       // isAccessAllowed: () => true,
