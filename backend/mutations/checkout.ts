@@ -68,7 +68,7 @@ async function checkout(
       console.log(err.message);
       throw new Error(err.message);
     });
-  console.log(charge);
+  // console.log(charge);
   //5.convert cartItems to orderItems
   const orderItems = cartItems.map((cartItem) => {
     const orderItem = {
