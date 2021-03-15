@@ -11,6 +11,7 @@ import { OrderItem } from "./schemas/OrderItem";
 import { Order } from "./schemas/Order";
 import { CartItem } from "./schemas/CartItem";
 import { ProductImage } from "./schemas/ProductImage";
+import { Role } from "./schemas/Role";
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphqlShema } from "./mutations";
@@ -64,6 +65,7 @@ export default withAuth(
       OrderItem,
       CartItem,
       Order,
+      Role
     }),
     //custom resolvers
     extendGraphqlSchema: extendGraphqlShema,

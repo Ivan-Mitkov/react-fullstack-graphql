@@ -30,5 +30,9 @@ export const User = list({
       ref: "Order.user",
       many: true,
     }),
+    //Roles and Permissions
+    role: relationship({
+      ref: "Role.assignedTo",
+    }),
   },
 });
