@@ -92,7 +92,8 @@ async function checkout(
     },
   });
   //7.clean up old cart items
-  const cartItemsIds = cartItems.map((cartItem) => cartItem.id);
+  //get unfiltered cart item and delete as cart item even if product is null
+  const cartItemsIds = user.cart.map((cartItem) => cartItem.id);
   await context.lists.CartItem.deleteMany({
     ids: cartItemsIds,
   });

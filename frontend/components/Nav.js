@@ -12,7 +12,7 @@ const Nav = () => {
 
   const countItems = () => {
     const items = user.cart
-      .map((q) => q.quantity)
+      .map((q) => (q ? q.quantity : 0))
       .reduce((acc, q) => acc + q, 0);
     return items;
   };
