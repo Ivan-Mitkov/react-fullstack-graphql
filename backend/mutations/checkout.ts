@@ -68,10 +68,36 @@ async function checkout(
       console.log(err.message);
       throw new Error(err.message);
     });
-    console.log(charge)
+  console.log(charge);
   //5.convert cartItems to orderItems
-
+  const orderItems = cartItems.map((cartItem) => {
+    const orderItem = {
+      name: cartItem.product.name,
+      description: cartItem.product.description,
+      price: cartItem.product.price,
+      quantity: cartItem.quantity,
+      //make connection
+      photo: { connect: { id: cartItem.product.photo.id } },
+    };
+    return orderItem;
+  });
   //6.create order and return it
+  const order = await context.lists.Order.createOne({
+    data: {
+      total: charge.amount,
+      charge: charge.id,
+      //create relationship with order items before creating order
+      items: { create: orderItems },
+      user: { connect: { id: userId } },
+    },
+  });
+  //7.clean up old cart items
+  const cartItemsIds = cartItems.map((cartItem) => cartItem.id);
+  await context.lists.CartItem.deleteMany({
+    ids: cartItemsIds,
+  });
+  //
+  return order;
 }
 
 export { checkout };
