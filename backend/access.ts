@@ -23,5 +23,16 @@ export const permissions = {
   // }, and ... all others
 };
 
-//Rule based functions - used for lists access 
-
+//Rule based functions - used for lists access
+//can return boolean or a filter which limits which product they can CRUD
+export const rules = {
+  canManageProducts({ session }: ListAccessArgs) {
+    //1.Have are permission of canManageProducts
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    //2. If not do they own the product?
+    //graphql where clauses
+    return { user: { id: session.itemId } };
+  },
+};

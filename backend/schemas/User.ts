@@ -34,5 +34,10 @@ export const User = list({
     role: relationship({
       ref: "Role.assignedTo",
     }),
+    //create relatioship with the product
+    products: relationship({
+      ref: "Product.user",
+      many: true,
+    }),
   },
 });
