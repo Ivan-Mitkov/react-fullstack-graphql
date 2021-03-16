@@ -27,6 +27,10 @@ export const permissions = {
 //can return boolean or a filter which limits which product they can CRUD
 export const rules = {
   canManageProducts({ session }: ListAccessArgs) {
+     //if not signed in no access
+     if (!isSignedIn({ session })) {
+      return false;
+    }
     //1.Have are permission of canManageProducts
     if (permissions.canManageProducts({ session })) {
       return true;
@@ -35,7 +39,24 @@ export const rules = {
     //graphql where clauses
     return { user: { id: session.itemId } };
   },
+  canOrder({ session }: ListAccessArgs) {
+    //if not signed in no access
+    if (!isSignedIn({ session })) {
+      return false;
+    }
+    //1.Have are permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    //2. If not do they own the product?
+    //graphql where clauses
+    return { user: { id: session.itemId } };
+  },
   canReadProducts({ session }: ListAccessArgs) {
+     //if not signed in no access
+     if (!isSignedIn({ session })) {
+      return false;
+    }
     //1.Have are permission of canManageProducts - can read everything
     if (permissions.canManageProducts({ session })) {
       return true;
@@ -43,5 +64,18 @@ export const rules = {
     //can see only available products based on status
     //graphql where clauses
     return { status: "AVAILABLE" };
+  },
+  canManageOrderItems({ session }: ListAccessArgs) {
+     //if not signed in no access
+     if (!isSignedIn({ session })) {
+      return false;
+    }
+    //1.Have are permission of canManageProducts
+    if (permissions.canManageCart({ session })) {
+      return true;
+    }
+    //2. If the own the order in which is the order item
+    //graphql where clauses query the order then the user and then check the id
+    return { order: { user: { id: session.itemId } } };
   },
 };

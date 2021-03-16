@@ -1,11 +1,17 @@
 import { list } from "@keystone-next/keystone/schema";
 import { text, relationship, select, integer } from "@keystone-next/fields";
+import { isSignedIn, rules } from "../access";
 
 //If Product is change what is ordered stays the same
 //https://next.keystonejs.com/apis/schema
 export const OrderItem = list({
   //access
-  //ui
+  access:{
+    create:isSignedIn,
+    read:rules.canManageOrderItems,
+    update:()=>false,
+    delete:()=>false
+  },
 
   fields: {
     name: text({ isRequired: true }),

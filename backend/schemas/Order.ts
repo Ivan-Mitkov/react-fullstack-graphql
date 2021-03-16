@@ -7,10 +7,17 @@ import {
   virtual,
 } from "@keystone-next/fields";
 import formatMoney from "../lib/formatMoney";
+import { isSignedIn, rules } from "../access";
 
 //If Product is change what is ordered stays the same
 //https://next.keystonejs.com/apis/schema
 export const Order = list({
+  access:{
+    create:isSignedIn,
+    read:rules.canOrder,
+    update:()=>false,
+    delete:()=>false
+  },
   fields: {
     label: virtual({
       graphQLReturnType: "String",
