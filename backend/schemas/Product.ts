@@ -1,11 +1,15 @@
 import { list } from "@keystone-next/keystone/schema";
 import { text, relationship, select, integer } from "@keystone-next/fields";
+import { isSignedIn } from "../access";
 
 //https://next.keystonejs.com/apis/schema
 export const Product = list({
-  //access
-  //ui
-
+  access: {
+    create: isSignedIn,
+    read: isSignedIn,
+    update: isSignedIn,
+    delete: isSignedIn,
+  },
   fields: {
     name: text({ isRequired: true }),
     description: text({

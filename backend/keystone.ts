@@ -15,6 +15,7 @@ import { Role } from "./schemas/Role";
 import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { extendGraphqlShema } from "./mutations";
+import { permissionsList } from "./schemas/fields";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits";
@@ -65,7 +66,7 @@ export default withAuth(
       OrderItem,
       CartItem,
       Order,
-      Role
+      Role,
     }),
     //custom resolvers
     extendGraphqlSchema: extendGraphqlShema,
@@ -79,8 +80,10 @@ export default withAuth(
     },
     //https://next.keystonejs.com/apis/session
     session: withItemData(statelessSessions(sessionConfig), {
-      //Graphql query
-      User: `id name email`,
+      //Graphql query roles can be written explicitly or ..
+      User: `id name email role{
+        ${permissionsList.join(" ")}
+      }`,
     }),
   })
 );
