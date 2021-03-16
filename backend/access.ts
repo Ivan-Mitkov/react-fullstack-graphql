@@ -35,4 +35,13 @@ export const rules = {
     //graphql where clauses
     return { user: { id: session.itemId } };
   },
+  canReadProducts({ session }: ListAccessArgs) {
+    //1.Have are permission of canManageProducts - can read everything
+    if (permissions.canManageProducts({ session })) {
+      return true;
+    }
+    //can see only available products based on status
+    //graphql where clauses
+    return { status: "AVAILABLE" };
+  },
 };

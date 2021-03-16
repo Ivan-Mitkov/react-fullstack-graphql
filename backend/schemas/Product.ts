@@ -6,7 +6,7 @@ import { isSignedIn, rules } from "../access";
 export const Product = list({
   access: {
     create: isSignedIn,
-    read: isSignedIn,
+    read: rules.canReadProducts,
     update: rules.canManageProducts,
     delete: rules.canManageProducts,
   },
@@ -41,10 +41,12 @@ export const Product = list({
     //cents
     price: integer(),
     //when product is created make a relationship with the user who created it
-    user:relationship({
-      ref:'User.products',
+    user: relationship({
+      ref: "User.products",
       //defaultValue will be currently signed in user
-      defaultValue:({context})=>({connect:{id:context.session.itemId}})
-    })
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session.itemId },
+      }),
+    }),
   },
 });
